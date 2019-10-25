@@ -44,6 +44,8 @@ _clear_start_ten = lambda x: x[1:] if x.startswith(SPECIAL_NUM1_UPPER + SPECIAL_
 # 五百零零-> 五百零 -> 五百
 _get_standard_upper = lambda x: _clear_end_zero(_clear_repeat_zero(x))
 
+is_legal_amount = lambda x: True if x.replace(DOT_NUM, "").isdigit() else False
+
 def _gen_digit_part(num_str):
     """
     '4020' ->  divmod(4320, pow(10, 3)) -->4 320 -->'四'+ '千' + _gen_digit_part('320')
@@ -77,7 +79,7 @@ def conv_amount_to_mandarin(amount_str):
     货币数字转大写:
     '1203.05' --> 一千二百零三点零五元
     '''
-    if  not amount_str.replace(DOT_NUM, "").isdigit():
+    if not is_legal_amount(amount_str):
         raise ValueError("输入浮点数或整数对应字符串类型 : {}".format(amount_str))
     amount_str = _clear_start_zero(amount_str)
 

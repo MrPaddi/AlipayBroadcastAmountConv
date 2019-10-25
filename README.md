@@ -19,7 +19,18 @@ assert conv_amount_to_mandarin("12.50") == "十二点五"
 ```
 
 ### 2. 根据单字拼接语音
-在`alipay_word_wav`目录下基本的支付宝单字语音，可以使用 [Pydub](https://github.com/jiaaro/pydub) 对语音进行拼接
+在`alipay_word_wav`目录下基本的支付宝单字语音，使用 [Pydub](https://github.com/jiaaro/pydub) 对语音进行拼接
+```
+from gen_broadcast_audio import gen_single_audio
+
+dst_dir = "export"
+random_amount = "4025.40"
+_, amount_mandarin, amount_audio = gen_single_audio(random_amount)
+assert isinstance(amount_audio, AudioSegment)
+export_file_path = os.path.join(dst_dir, amount_mandarin+".wav")
+amount_audio.export(export_file_path, format="wav")
+```
+批量文件生成可以使用`gen_batch_audio`。详情参考`gen_broadcast_audio.py`
 
 *注：`Pydub`依赖[ffmpeg](http://ffmpeg.org/)*，相关资源请自行到网上查阅
 

@@ -21,6 +21,8 @@ assert conv_amount_to_mandarin("12.50") == "十二点五"
 ### 2. 根据单字拼接语音
 在`alipay_word_wav`目录下基本的支付宝单字语音，使用 [Pydub](https://github.com/jiaaro/pydub) 对语音进行拼接
 ```
+import os
+from pydub import AudioSegment
 from gen_broadcast_audio import gen_single_audio
 
 dst_dir = "export"
